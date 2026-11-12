@@ -141,12 +141,20 @@ jobs:
             !*.d
 
   # Anylinux AppImage built with quick-sharun (pkgforge-dev) so the CLI runs on any
-  # glibc-based distro without a matching runtime. x86_64 only; add an
-  # aarch64 entry mirroring the cross-compile matrix when wanted.
+  # glibc-based distro without a matching runtime. aarch64 runs natively on
+  # ubuntu-24.04-arm; other arches can mirror the aprsmap emulated-job pattern.
   appimage:
-    name: appimage (anylinux-x86_64)
+    name: appimage (anylinux-${{ matrix.arch }})
     needs: [lint, test, security, golden-cross-platform, bench-regression, fidelity-smoke]
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: x86_64
+            runs-on: ubuntu-latest
+          - arch: aarch64
+            runs-on: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runs-on }}
     container: ghcr.io/pkgforge-dev/archlinux:latest
     steps:
       - uses: actions/checkout@v6
@@ -162,7 +170,7 @@ jobs:
           done
       - uses: actions/upload-artifact@v7
         with:
-          name: tokenfold-anylinux-x86_64
+          name: tokenfold-anylinux-${{ matrix.arch }}
           path: dist/*.AppImage*
 
   sbom:
