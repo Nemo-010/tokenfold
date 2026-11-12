@@ -19,6 +19,7 @@ rustup toolchain install 1.98 --profile minimal
 cargo build --release --locked -p tokenfold-cli
 install -Dm755 target/release/tokenfold /usr/bin/tokenfold
 
+mkdir -p dist
 magick docs/assets/tokenfold-logo.png -background none -gravity center -resize 256x256 -extent 256x256 "$ICON"
 
 wget "$SHARUN" -O ./quick-sharun
