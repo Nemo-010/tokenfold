@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Tokenfold
+GenericName=LLM context compression
+Comment=Portable CLI for token-aware compression of LLM payloads
+Exec=tokenfold
+Icon=tokenfold
+Terminal=true
+Categories=Development;
+StartupNotify=false

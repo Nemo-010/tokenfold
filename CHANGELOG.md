@@ -3,6 +3,11 @@
 
 ## [Unreleased]
 
+- Add an x86_64 AppImage of the CLI to the tag release pipeline, packaged with
+  quick-sharun (`appimage/make-appimage.sh`, anylinux/pkgforge-dev tooling) so the
+  release includes `tokenfold-<version>-anylinux-x86_64.AppImage` and its zsync
+  update file alongside the existing platform binaries.
+
 ## [0.6.0] - 2026-11-10
 
 - Replace primary Python/Node APIs with native, offline `fit`, typed inputs/results,
